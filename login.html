@@ -1,0 +1,42 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Logistics System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #0f172a; color: white; display: flex; align-items: center; min-height: 100vh; }
+        .login-card { background: #1e293b; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 100%; max-width: 400px; margin: auto; }
+        .btn-primary { background: #deff9a; color: black; border: none; font-weight: bold; }
+        .btn-primary:hover { background: #c5eb85; color: black; }
+        input { background: #334155 !important; border: none !important; color: white !important; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2 class="text-center mb-4">Logistik System</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} small">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label>Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="admin@logistik.com" required>
+            </div>
+            <div class="mb-4">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2">Masuk</button>
+            <p class="text-center mt-3 small">Belum punya akun? <a href="/register" class="text-info">Daftar di sini</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengajuan Retur | Ari Logistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-neon: #38bdf8;
+            --text-main: #f1f5f9;
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        .card-return {
+            background-color: var(--card-dark);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            padding: 30px;
+            color: #0f172a;
+            text-align: center;
+        }
+
+        .form-control, .form-select {
+            background-color: #0f172a !important;
+            border: 1px solid #334155 !important;
+            color: white !important;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-neon) !important;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3) !important;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-neon);
+            color: #0f172a;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover {
+            background-color: #7dd3fc;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .info-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid var(--accent-neon);
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            
+            <div class="card-return">
+                <div class="header-gradient">
+                    <i class="bi bi-arrow-left-right fs-1"></i>
+                    <h3 class="fw-bold m-0 mt-2">Formulir Retur Barang</h3>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form action="/submit_return" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="info-box mb-4">
+                            <small class="text-neon fw-bold d-block mb-1 text-uppercase">Informasi Transaksi</small>
+                            <p class="mb-0 small text-muted">ID Transaksi: <span class="text-white fw-bold">191A0R7S6W3L1M</span></p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-info">BARANG YANG DIKEMBALIKAN</label>
+                            <select name="item_name" class="form-select">
+                                <option value="Poci Teh Celup 25s">Poci Teh Celup 25's</option>
+                                <option value="IDM Air Minum 600ml">IDM Air Minum 600ml</option>
+                                <option value="IDM Krupuk Udang 70g">IDM Krupuk Udang 70g</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-info">ALASAN PENGEMBALIAN</label>
+                            <textarea name="reason" class="form-control" rows="3" placeholder="Misal: Barang kadaluarsa, kemasan pecah, atau item tidak sesuai..." required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-info">FOTO BUKTI (STRUK/BARANG)</label>
+                            <input type="file" name="evidence" class="form-control" accept="image/*" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit w-100 shadow">
+                            Kirim Permintaan Retur
+                        </button>
+                        
+                        <div class="text-center mt-4">
+                            <a href="/dashboard" class="text-muted text-decoration-none small">
+                                <i class="bi bi-chevron-left"></i> Batal dan Kembali
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

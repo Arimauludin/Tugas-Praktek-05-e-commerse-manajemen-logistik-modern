@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Saya | Ari Logistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar { background-color: #005088; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card-order { border: none; border-radius: 16px; overflow: hidden; transition: 0.3s; }
+        .card-order:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important; }
+        .status-tracker { background: #fff; padding: 20px; border-radius: 12px; }
+        
+        /* Stepper Style */
+        .stepper { display: flex; justify-content: space-around; margin-top: 20px; position: relative; }
+        .step { text-align: center; width: 100%; position: relative; z-index: 1; }
+        .step-icon { width: 35px; height: 35px; border-radius: 50%; background: #e9ecef; display: inline-flex; align-items: center; justify-content: center; color: #adb5bd; font-weight: bold; margin-bottom: 5px; }
+        .step.active .step-icon { background: #005088; color: white; }
+        .step.completed .step-icon { background: #198754; color: white; }
+        .step-label { font-size: 11px; font-weight: 600; color: #6c757d; }
+        .step.active .step-label { color: #005088; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark mb-5">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/"><i class="bi bi-box-sealer-fill me-2"></i>Ari Logistics</a>
+        <a href="/" class="btn btn-light btn-sm rounded-pill px-3">Belanja Lagi</a>
+    </div>
+</nav>
+
+<div class="container pb-5">
+    <h3 class="fw-bold mb-4"><i class="bi bi-clock-history me-2 text-primary"></i>Riwayat Pesanan</h3>
+
+    {% if orders %}
+        <div class="row">
+            {% for o in orders %}
+            <div class="col-12 mb-4">
+                <div class="card card-order shadow-sm border">
+                    <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3">#ORD-{{ o.id }}</span>
+                        </div>
+                        <div class="text-end">
+                            <span class="small text-muted d-block">Metode Pembayaran</span>
+                            <span class="fw-bold small text-uppercase text-primary">{{ o.metode_pembayaran }}</span>
+                        </div>
+                    </div>
+                    <div class="card-body bg-light-subtle">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-5">
+                                <h6 class="fw-bold mb-1"><i class="bi bi-cup-hot me-2 text-secondary"></i>Item Pesanan:</h6>
+                                <p class="mb-0 text-dark">{{ o.items }}</p>
+                                <hr class="my-2 opacity-50">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <span class="text-muted small">Total Tagihan:</span>
+                                    <span class="fw-bold text-danger">Rp{{ "{:,.0f}".format(o.total_harga).replace(',', '.') }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-7 border-start ps-md-4">
+                                <div class="status-tracker border shadow-sm rounded-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="fw-bold mb-0 small">Lacak Status</h6>
+                                        <small class="text-primary fw-bold">Resi: {{ o.resi }}</small>
+                                    </div>
+                                    
+                                    <div class="stepper">
+                                        <div class="step completed">
+                                            <div class="step-icon"><i class="bi bi-check-lg"></i></div>
+                                            <div class="step-label">Dibayar</div>
+                                        </div>
+                                        <div class="step active">
+                                            <div class="step-icon"><i class="bi bi-truck"></i></div>
+                                            <div class="step-label">Dikirim</div>
+                                        </div>
+                                        <div class="step">
+                                            <div class="step-icon"><i class="bi bi-house-check"></i></div>
+                                            <div class="step-label">Diterima</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card border-0 shadow-sm rounded-4 py-5 text-center">
+            <div class="card-body">
+                <i class="bi bi-cart-x text-muted" style="font-size: 3rem;"></i>
+                <h5 class="fw-bold mt-3">Belum ada pesanan</h5>
+                <p class="text-muted small">Pesanan yang kamu buat akan muncul di sini.</p>
+                <a href="/" class="btn btn-primary rounded-pill px-4">Mulai Belanja</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
